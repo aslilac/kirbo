@@ -1,0 +1,7 @@
+{
+	"name": "kirbo",
+	"version": "0.0.0",
+	"devDependencies": {
+		"eslint-config-mckayla": "^1.0.0"
+	}
+}
