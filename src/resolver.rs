@@ -4,7 +4,7 @@ use std::collections::HashMap;
 
 use crate::npm;
 
-static CLIENT: Lazy<reqwest::Client> = Lazy::new(|| reqwest::Client::new());
+static CLIENT: Lazy<reqwest::Client> = Lazy::new(reqwest::Client::new);
 
 #[derive(Debug, Default)]
 pub struct Resolver {
@@ -46,7 +46,7 @@ impl Resolver {
 
 		for (dependency, version) in dependencies {
 			// Not ideal to clone, but the borrow checker thinks this is a mutable borrow?
-			let doc = self.query_package(&dependency).await.clone();
+			let doc = self.query_package(dependency).await.clone();
 
 			let desired_version = doc
 				.versions

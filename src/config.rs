@@ -6,7 +6,7 @@ pub struct Env {
 	execpath: PathBuf,
 }
 
-pub const ENV: Lazy<Env> = Lazy::new(|| {
+pub static ENV: Lazy<Env> = Lazy::new(|| {
 	let execpath = current_exe().unwrap();
 	Env { execpath }
 });
