@@ -8,26 +8,27 @@ jobs:
   release:
     strategy:
       matrix:
-        - os: ubuntu-latest
-          target: aarch64-unknown-linux-gnu
-          executable: kirbo
-        - os: ubuntu-latest
-          target: x86_64-unknown-linux-gnu
-          executable: kirbo
-        - os: windows-latest
-          target: aarch64-pc-windows-msvc
-          executable: kirbo.exe
-        - os: windows-latest
-          target: x86_64-pc-windows-msvc
-          executable: kirbo.exe
-        - os: macos-latest
-          target: aarch64-apple-darwin
-          executable: kirbo
-        - os: macos-latest
-          target: x86_64-apple-darwin
-          executable: kirbo
+        release:
+          - os: ubuntu-latest
+            target: aarch64-unknown-linux-gnu
+            executable: kirbo
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            executable: kirbo
+          - os: windows-latest
+            target: aarch64-pc-windows-msvc
+            executable: kirbo.exe
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            executable: kirbo.exe
+          - os: macos-latest
+            target: aarch64-apple-darwin
+            executable: kirbo
+          - os: macos-latest
+            target: x86_64-apple-darwin
+            executable: kirbo
 
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.release.os }}
 
     steps:
       - uses: actions/checkout@v3
@@ -42,13 +43,13 @@ jobs:
           path: |
             ~/.cargo/
             ${{ steps.config.outputs.target-directory }}
-          key: release-${{ matrix.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: release-${{ matrix.os }}-cargo-
+          key: release-${{ matrix.release.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: release-${{ matrix.release.os }}-cargo-
 
-      - run: cargo build --target ${{ matrix.target }} --release
-        name: Build — ${{ matrix.target }}
+      - run: cargo build --target ${{ matrix.release.target }} --release
+        name: Build — ${{ matrix.release.target }}
 
       - uses: actions/upload-artifact@v2
         with:
-          name: ${{ matrix.target }}-${{ matrix.executable }}
-          path: ${{ steps.config.outputs.target-directory }}/${{ matrix.target }}/release/${{ matrix.executable }}
+          name: ${{ matrix.release.target }}-${{ matrix.executable }}
+          path: ${{ steps.config.outputs.target-directory }}/${{ matrix.release.target }}/release/${{ matrix.release.executable }}
