@@ -50,8 +50,8 @@ jobs:
       - run: cargo build --target ${{ matrix.release.target }} --release
         name: Build — ${{ matrix.release.target }}
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         name: Upload — ${{ matrix.release.target }}
         with:
-          name: ${{ matrix.release.target }}-${{ matrix.executable }}
+          name: ${{ matrix.release.target }}-${{ matrix.release.executable }}
           path: ./build/${{ matrix.release.target }}/release/${{ matrix.release.executable }}
