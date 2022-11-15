@@ -2,9 +2,11 @@ use std::env;
 
 mod commands;
 mod config;
+mod lock;
 mod npm;
 mod options;
 mod resolver;
+mod semver;
 use options::Command::*;
 use options::Options;
 

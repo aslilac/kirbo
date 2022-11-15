@@ -56,7 +56,15 @@ where
 					options.command = Some(Command::Run);
 				}
 				_ => {
-					options.command = Some(Command::Install);
+					options.command = if (arg.len() >= 2 && arg.starts_with('-'))
+						|| arg.len() >= 3 && arg.starts_with("--")
+					{
+						// If it's a `--flag`, then we probably want `kirbo install`
+						Some(Command::Install)
+					} else {
+						// If it's a `word`, then we probably want `kirbo run $word`
+						Some(Command::Run)
+					};
 					options.remaining_args.push(arg.to_string());
 				}
 			}

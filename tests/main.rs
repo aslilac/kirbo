@@ -20,7 +20,7 @@ fn run_prettier() {
 	testing::before();
 
 	let result = Command::new(&*EXE)
-		.current_dir("./tests/testdata/11-prettier/")
+		.current_dir("./tests/testdata/20-prettier/")
 		.args(["--", "prettier", "--check", "."])
 		.output()
 		.unwrap();

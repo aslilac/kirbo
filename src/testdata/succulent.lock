@@ -1,0 +1,5 @@
+lockVersion: 0a
+packages:
+  succulent@^0.18.0:
+    resolved: https://registry.npmjs.org/succulent/-/succulent-0.18.0.tgz
+    sha512: abcdefghijklmnopqrstuvwxyz

@@ -1,14 +1,26 @@
 use serde::Deserialize;
 use std::collections::HashMap;
+use std::path::PathBuf;
+
+pub struct Workspace {
+	pub members: HashMap<PathBuf, PackageJson>,
+}
 
 #[derive(Clone, Debug, Default, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PackageJson {
+	pub private: Option<bool>,
 	pub name: Option<String>,
 	pub version: Option<String>,
-	pub dependencies: Option<HashMap<String, String>>,
-	pub dev_dependencies: Option<HashMap<String, String>>,
-	pub scripts: Option<HashMap<String, String>>,
+	pub license: Option<String>,
+	#[serde(default, skip_serializing_if = "HashMap::is_empty")]
+	pub dependencies: HashMap<String, String>,
+	#[serde(default, skip_serializing_if = "HashMap::is_empty")]
+	pub peer_dependencies: HashMap<String, String>,
+	#[serde(default, skip_serializing_if = "HashMap::is_empty")]
+	pub dev_dependencies: HashMap<String, String>,
+	#[serde(default, skip_serializing_if = "HashMap::is_empty")]
+	pub scripts: HashMap<String, String>,
 }
 
 #[derive(Clone, Debug, Deserialize)]
@@ -21,7 +33,8 @@ pub struct RegistryDoc {
 #[derive(Clone, Debug, Deserialize)]
 pub struct RegistryDocVersion {
 	pub version: String,
-	pub dependencies: Option<HashMap<String, String>>,
+	#[serde(default, skip_serializing_if = "HashMap::is_empty")]
+	pub dependencies: HashMap<String, String>,
 	pub dist: PackageDist,
 }
 
