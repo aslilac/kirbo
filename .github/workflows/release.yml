@@ -32,24 +32,25 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - run: echo "::set-output name=target-directory::$(cargo metadata --format-version=1 | jq .target_directory -r)"
-        id: config
-        shell: bash
+        name: Checkout
 
       - uses: actions/cache@v3
-        name: Meta — Cache (6/12)
+        name: Configure cache
         with:
           path: |
             ~/.cargo/
-            ${{ steps.config.outputs.target-directory }}
-          key: release-${{ matrix.release.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: release-${{ matrix.release.os }}-cargo-
+            ./build/
+          key: release-${{ matrix.release.target }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: release-${{ matrix.release.target }}-cargo-
+
+      - run: rustup add target ${{ matrix.release.target }}
+        name: Prepare — ${{ matrix.release.target }}
 
       - run: cargo build --target ${{ matrix.release.target }} --release
         name: Build — ${{ matrix.release.target }}
 
       - uses: actions/upload-artifact@v2
+        name: Upload — ${{ matrix.release.target }}
         with:
           name: ${{ matrix.release.target }}-${{ matrix.executable }}
-          path: ${{ steps.config.outputs.target-directory }}/${{ matrix.release.target }}/release/${{ matrix.release.executable }}
+          path: ./build/${{ matrix.release.target }}/release/${{ matrix.release.executable }}
