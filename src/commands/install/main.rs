@@ -24,9 +24,8 @@ pub async fn main(options: options::Options) {
 	let joined_dependencies = package
 		.dependencies
 		.clone()
-		.unwrap_or_default()
 		.into_iter()
-		.chain(package.dev_dependencies.clone().unwrap_or_default())
+		.chain(package.dev_dependencies.clone())
 		.collect::<HashMap<_, _>>();
 
 	let mut resolver = Resolver::default();

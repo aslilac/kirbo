@@ -75,19 +75,19 @@ impl Resolver {
 
 			resolved_dependencies.insert(dependency.clone(), desired_tarball);
 
-			if let Some(transitive_dependencies) = &desired_version.dependencies {
-				resolved_dependencies.extend(
-					self.resolve_dependencies(
-						transitive_dependencies
-							.iter()
-							.filter(|&(name, _)| !self.package_docs.contains_key(name))
-							.collect::<HashMap<_, _>>(),
-						dependency,
-						layer + 1,
-					)
-					.await,
-				);
-			};
+			let transitive_dependencies = &desired_version.dependencies;
+
+			resolved_dependencies.extend(
+				self.resolve_dependencies(
+					transitive_dependencies
+						.iter()
+						.filter(|&(name, _)| !self.package_docs.contains_key(name))
+						.collect::<HashMap<_, _>>(),
+					dependency,
+					layer + 1,
+				)
+				.await,
+			);
 		}
 
 		resolved_dependencies
