@@ -51,7 +51,7 @@ jobs:
       - run: cargo build --target ${{ matrix.release.target }} --release
         name: Build — ${{ matrix.release.target }}
 
-      - run: tar -a -cf kirbo-${{ github.ref }}-${{ matrix.release.target }}.tar.gz ${{ matrix.release.executable }}
+      - run: tar -a -cf kirbo-${{ github.ref_name }}-${{ matrix.release.target }}.tar.gz ${{ matrix.release.executable }}
 
       # - uses: actions/upload-artifact@v3
       #   name: Upload — ${{ matrix.release.target }}
@@ -62,4 +62,4 @@ jobs:
       - uses: softprops/action-gh-release@v1
         name: Release
         with:
-          files: ./build/${{ matrix.release.target }}/release/kirbo-${{ github.ref }}-${{ matrix.release.target }}.tar.gz
+          files: ./build/${{ matrix.release.target }}/release/kirbo-${{ github.ref_name }}-${{ matrix.release.target }}.tar.gz
