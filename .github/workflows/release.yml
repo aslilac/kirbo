@@ -51,23 +51,14 @@ jobs:
       - run: cargo build --target ${{ matrix.release.target }} --release
         name: Build — ${{ matrix.release.target }}
 
+      - run: tar -a -cf kirbo-${{ github.ref }}-${{ matrix.release.target }}.tar.gz ${{ matrix.release.executable }}
+
       # - uses: actions/upload-artifact@v3
       #   name: Upload — ${{ matrix.release.target }}
       #   with:
       #     name: ${{ matrix.release.target }}-kirbo
       #     path: ./build/${{ matrix.release.target }}/release/${{ matrix.release.executable }}
 
-      - run: tar -a -cf kirbo-${{ github.ref }}-${{ matrix.release.target }}.tar.gz ${{ matrix.release.executable }}
-
       - uses: softprops/action-gh-release@v1
         name: Release
         files: ./build/${{ matrix.release.target }}/release/kirbo-${{ github.ref }}-${{ matrix.release.target }}.tar.gz
-
-  publish:
-    runs-on: ubuntu-latest
-    needs: release
-
-    -
-
-    - steps:
-        uses: softprops/action-gh-release@v1
