@@ -61,4 +61,5 @@ jobs:
 
       - uses: softprops/action-gh-release@v1
         name: Release
-        files: ./build/${{ matrix.release.target }}/release/kirbo-${{ github.ref }}-${{ matrix.release.target }}.tar.gz
+        with:
+          files: ./build/${{ matrix.release.target }}/release/kirbo-${{ github.ref }}-${{ matrix.release.target }}.tar.gz
