@@ -52,6 +52,8 @@ jobs:
         name: Build — ${{ matrix.release.target }}
 
       - run: tar -a -cf kirbo-${{ github.ref_name }}-${{ matrix.release.target }}.tar.gz ${{ matrix.release.executable }}
+        name: Package — ${{ matrix.release.target }}
+        working-directory: ./build/${{ matrix.release.target }}/release/
 
       # - uses: actions/upload-artifact@v3
       #   name: Upload — ${{ matrix.release.target }}
