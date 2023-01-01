@@ -1,5 +1,7 @@
 use std::process::exit;
 
+use colored::Colorize;
+
 #[derive(Clone, Debug, Default)]
 struct OptionsBuilder {
 	command: Option<Command>,
@@ -16,6 +18,7 @@ pub struct Options {
 pub enum Command {
 	Install,
 	Run,
+	Exec,
 }
 
 impl From<OptionsBuilder> for Options {
@@ -46,7 +49,11 @@ where
 					exit(0);
 				}
 				"-v" | "-V" | "--version" => {
-					println!("{} {}", env!("CARGO_PKG_NAME"), env!("CARGO_PKG_VERSION"));
+					println!(
+						"{} {}",
+						env!("CARGO_PKG_NAME").bright_magenta().bold(),
+						env!("CARGO_PKG_VERSION").bold()
+					);
 					exit(0);
 				}
 				"install" => {
@@ -54,6 +61,9 @@ where
 				}
 				"run" => {
 					options.command = Some(Command::Run);
+				}
+				"exec" | "--" => {
+					options.command = Some(Command::Exec);
 				}
 				_ => {
 					options.command = if (arg.len() >= 2 && arg.starts_with('-'))

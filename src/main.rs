@@ -17,5 +17,6 @@ async fn main() {
 	match &options.command {
 		Install => commands::install::main::main(options).await,
 		Run => commands::run::main::main(options),
+		Exec => commands::exec::main::main(options),
 	}
 }

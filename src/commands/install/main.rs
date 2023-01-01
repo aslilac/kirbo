@@ -1,3 +1,4 @@
+use colored::Colorize;
 use std::collections::HashMap;
 use std::fs;
 
@@ -7,6 +8,8 @@ use crate::options;
 use crate::resolver::Resolver;
 
 pub async fn main(options: options::Options) {
+	println!("{}", "kirbo install".bright_magenta().bold());
+
 	let options = options.remaining_args.into_iter().collect::<Options>();
 	let package = serde_json::from_str::<PackageJson>(
 		&fs::read_to_string(options.input.join("package.json")).unwrap(),
