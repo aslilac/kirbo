@@ -25,5 +25,5 @@ fn run_prettier() {
 		.output()
 		.unwrap();
 
-	assert!(!result.status.success());
+	assert!(result.status.success());
 }
