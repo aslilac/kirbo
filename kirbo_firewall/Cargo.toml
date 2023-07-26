@@ -1,0 +1,14 @@
+[package]
+name = "kirbo_firewall"
+version = "1.0.0"
+authors = ["McKayla Washburn <mckayla@hey.com>"]
+description = "Popular, obnoxious, trivially reimplemented npm packages."
+keywords = []
+license = "MIT"
+homepage = "https://github.com/aslilac/kirbo"
+repository = "https://github.com/aslilac/kirbo"
+documentation = "https://docs.rs/kirbo"
+edition = "2021"
+
+[lib]
+path = "./kirbo_firewall.rs"

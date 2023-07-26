@@ -1,0 +1,16 @@
+{
+	"name": "kirbo",
+	"version": "0.0.0",
+	"devDependencies": {
+		"succulent": "^0.20.0"
+	},
+	"scripts": {
+		"build": "tsc -p tsconfig.build.json",
+		"dev": "tsc -p tsconfig.build.json -w",
+		"fmt": "prettier --write .",
+		"lint": "eslint .",
+		"prepack": "npm run build -s",
+		"test": "jest",
+		"type-check": "tsc -p . --noEmit"
+	}
+}

@@ -1,0 +1,7 @@
+lockVersion: 1
+binaries:
+  prettier: prettier@3.0.0
+packages:
+  prettier@3.0.0:
+    resolved: https://registry.npmjs.org/prettier/-/prettier-3.0.0.tgz
+    sha512: abcdefghijklmnopqrstuvwxyz

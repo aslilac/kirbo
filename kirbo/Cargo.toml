@@ -1,0 +1,28 @@
+[package]
+name = "kirbo"
+version = "0.0.2"
+authors = ["McKayla Washburn <mckayla@hey.com>"]
+description = "A secure and fast npm/yarn alternative"
+keywords = []
+license = "MIT"
+homepage = "https://github.com/aslilac/kirbo"
+repository = "https://github.com/aslilac/kirbo"
+documentation = "https://docs.rs/kirbo"
+edition = "2021"
+
+[[bin]]
+name = "kirbo"
+path = "./program.rs"
+
+[dependencies]
+anyhow = "1.0.72"
+async-recursion = "1.0.0"
+colored = "2.0.0"
+flate2 = { version = "1.0.17", features = ["zlib-ng"], default-features = false }
+once_cell = "1.15.0"
+reqwest = { version = "0.11.12", features = ["json"] }
+serde = { workspace = true }
+serde_json = { workspace = true }
+serde_yaml = { workspace = true }
+serde_yarn_lock = { workspace = true }
+tokio = { version = "1.21.2", features = ["macros", "rt-multi-thread"] }

@@ -1,21 +1,16 @@
-[package]
-name = "kirbo"
-version = "0.0.2"
-authors = ["McKayla Washburn <mckayla@hey.com>"]
-description = "A secure and fast npm/yarn alternative"
-keywords = []
-license = "MIT"
-homepage = "https://github.com/aslilac/kirbo"
-repository = "https://github.com/aslilac/kirbo"
-documentation = "https://docs.rs/kirbo"
-edition = "2021"
+[workspace]
+resolver = "2"
+members = [
+	"kirbo/",
+	"kirbo_firewall/",
+	"serde_yarn_lock/",
+]
 
-[dependencies]
-async-recursion = "1.0.0"
-colored = "2.0.0"
-once_cell = "1.15.0"
-reqwest = { version = "0.11.12", features = ["json"] }
+[workspace.dependencies]
+kirbo_firewall = { version = "*", path = "kirbo_firewall/" }
+kirbo_npm = { version = "*", path = "kirbo_npm/" }
+kirbo_yarn = { version = "*", path = "kirbo_yarn/" }
 serde = { version = "1.0.147", features = ["derive"] }
 serde_json = "1.0.87"
 serde_yaml = "0.9.14"
-tokio = { version = "1.21.2", features = ["macros", "rt-multi-thread"] }
+serde_yarn_lock = { version = "*", path = "serde_yarn_lock/" }
