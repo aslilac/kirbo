@@ -43,7 +43,7 @@ where
 		if args.len() == 1 {
 			match args[0].as_ref() {
 				"-h" | "-help" | "--help" | "-?" | "help" => {
-					println!("get some help");
+					print!("{}", include_str!("./help.txt"));
 					exit(0);
 				}
 				_ => (),
@@ -85,7 +85,7 @@ where
 				continue;
 			}
 
-			// `-Oa` should add "a" to `devDependencies`
+			// `-Oa` should add "a" to `optionalDependencies`
 			if arg.len() >= 3
 				&& arg.starts_with("-O")
 				&& arg.bytes().nth(2).unwrap().is_ascii_alphanumeric()

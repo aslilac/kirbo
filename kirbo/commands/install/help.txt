@@ -1,0 +1,11 @@
+usage: kirbo
+       kirbo install [options...] [packages...]
+       kirbo add [options...] [packages...]
+
+  -D<pkg>   add package to devDependencies and install
+  -T<pkg>   add package to testDependencies and install
+  -O<pkg>   add package to optionalDependencies and install
+
+more examples:
+       kirbo add succulent -Dtypescript
+       kirbo add react react-dom -D@types/react -D@types/react-dom

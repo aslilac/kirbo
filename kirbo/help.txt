@@ -1,0 +1,7 @@
+usage: kirbo
+       kirbo add [options...] [packages...]
+       kirbo -- [command] [args...]
+       kirbo [script] [args...]
+
+  -h, --help          show this help message
+  -v, --version       show version information
