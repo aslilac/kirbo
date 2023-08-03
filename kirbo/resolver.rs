@@ -33,7 +33,7 @@ impl Resolver {
 		Ok(self.package_docs.get(package).unwrap())
 	}
 
-	#[async_recursion]
+	#[async_recursion(?Send)]
 	pub async fn resolve_dependencies<'a, D>(
 		&mut self,
 		dependencies: D,
@@ -73,9 +73,9 @@ impl Resolver {
 
 			// println!("----------------------------------------");
 			println!(
-				"\t{}| {} > {}@{}",
-				"  ".repeat(layer),
-				parent,
+				// "\t{}⎣ {}@{}",
+				"\t{}├ {}@{}",
+				"⎜ ".repeat(layer),
 				dependency,
 				matched_version
 			);
@@ -91,15 +91,16 @@ impl Resolver {
 			let transitive_dependencies = &desired_version.dependencies;
 
 			resolved_dependencies.extend(
-				self.resolve_dependencies(
-					transitive_dependencies
-						.iter()
-						.filter(|&(name, _)| !self.package_docs.contains_key(name))
-						.collect::<HashMap<_, _>>(),
-					dependency,
-					layer + 1,
-				)
-				.await?,
+				self
+					.resolve_dependencies(
+						transitive_dependencies
+							.iter()
+							.filter(|&(name, _)| !self.package_docs.contains_key(name))
+							.collect::<HashMap<_, _>>(),
+						dependency,
+						layer + 1,
+					)
+					.await?,
 			);
 		}
 

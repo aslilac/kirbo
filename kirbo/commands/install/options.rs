@@ -96,7 +96,7 @@ where
 				continue;
 			}
 
-			if arg.len() >= 2 && arg.starts_with('-') || arg.len() >= 3 && arg.starts_with("--") {
+			if (arg.len() >= 2 && arg.starts_with('-')) || (arg.len() >= 3 && arg.starts_with("--")) {
 				match arg {
 					_ => {
 						println!("unrecognized option: {}", arg);

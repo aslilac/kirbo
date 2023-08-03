@@ -83,7 +83,7 @@ where
 				}
 				_ => {
 					options.command = if (arg.len() >= 2 && arg.starts_with('-'))
-						|| arg.len() >= 3 && arg.starts_with("--")
+						|| (arg.len() >= 3 && arg.starts_with("--"))
 					{
 						// If it's a `--flag`, then we probably want `kirbo install`
 						Some(Command::Install)
