@@ -24,5 +24,4 @@ reqwest = { version = "0.11.12", features = ["json"] }
 serde = { workspace = true }
 serde_json = { workspace = true }
 serde_yaml = { workspace = true }
-serde_yarn_lock = { workspace = true }
 tokio = { version = "1.21.2", features = ["macros", "rt-multi-thread"] }

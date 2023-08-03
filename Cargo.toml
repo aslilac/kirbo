@@ -3,7 +3,6 @@ resolver = "2"
 members = [
 	"kirbo/",
 	"kirbo_firewall/",
-	"serde_yarn_lock/",
 ]
 
 [workspace.dependencies]
@@ -13,4 +12,3 @@ kirbo_yarn = { version = "*", path = "kirbo_yarn/" }
 serde = { version = "1.0.147", features = ["derive"] }
 serde_json = "1.0.87"
 serde_yaml = "0.9.14"
-serde_yarn_lock = { version = "*", path = "serde_yarn_lock/" }

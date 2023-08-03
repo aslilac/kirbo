@@ -32,7 +32,10 @@ pub fn main(options: Options) {
 		.into_os_string();
 
 	if let Some(path) = env::var_os("PATH") {
-		// TODO: Windows ; `env::join_paths` blah blah
+		// TODO: Maybe use `env::join_paths`?
+		#[cfg(target_os = "win")]
+		path_env.extend([OsStr::new(";"), &path]);
+		#[cfg(not(target_os = "win"))]
 		path_env.extend([OsStr::new(":"), &path]);
 	};
 
@@ -43,13 +46,27 @@ pub fn main(options: Options) {
 		script.to_mut().extend([format!(" ${}", it - 1)]);
 	}
 
-	Command::new("sh")
-		.arg("-c")
-		.arg(&*script)
-		.args(&args[1..])
-		.env("PATH", path_env)
-		.spawn()
-		.unwrap()
-		.wait()
-		.unwrap();
+	#[cfg(not(windows))]
+	let mut cmd = {
+		let mut cmd = Command::new("sh");
+		cmd
+			.arg("-c")
+			.arg(&*script)
+			.args(&args[1..])
+			.env("PATH", path_env);
+		cmd
+	};
+
+	#[cfg(windows)]
+	let mut cmd = {
+		let mut cmd = Command::new("powershell");
+		cmd
+			.arg("-Command")
+			.arg(&*script)
+			.args(&args[1..])
+			.env("PATH", path_env);
+		cmd
+	};
+
+	cmd.spawn().unwrap().wait().unwrap();
 }

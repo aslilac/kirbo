@@ -1,5 +1,7 @@
 {
 	"scripts": {
-		"env": "env"
+		"env": "env",
+		"env:windows": "get-item -Path Env:",
+		"hello": "echo 'hello, computer!'"
 	}
 }
