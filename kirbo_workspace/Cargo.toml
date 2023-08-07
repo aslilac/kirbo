@@ -1,0 +1,20 @@
+[package]
+name = "kirbo_workspace"
+version = "1.0.0"
+authors = ["McKayla Washburn <mckayla@hey.com>"]
+description = "Workspace resolution and type definitions"
+keywords = []
+license = "MIT"
+homepage = "https://github.com/aslilac/kirbo/tree/main/kirbo_workspace"
+repository = "https://github.com/aslilac/kirbo"
+documentation = "https://docs.rs/kirbo_workspace"
+edition = "2021"
+
+[lib]
+path = "./lib.rs"
+
+[dependencies]
+anyhow = "1.0.72"
+serde = { workspace = true }
+serde_json = { workspace = true }
+serde_yaml = { workspace = true }

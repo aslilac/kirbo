@@ -1,0 +1,7 @@
+{
+	"name": "poyo",
+	"type": "module",
+	"exports": {
+		".": "./index.js"
+	}
+}

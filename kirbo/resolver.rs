@@ -37,7 +37,6 @@ impl Resolver {
 	pub async fn resolve_dependencies<'a, D>(
 		&mut self,
 		dependencies: D,
-		parent: &str,
 		layer: usize,
 	) -> anyhow::Result<HashMap<String, String>>
 	where
@@ -97,7 +96,6 @@ impl Resolver {
 							.iter()
 							.filter(|&(name, _)| !self.package_docs.contains_key(name))
 							.collect::<HashMap<_, _>>(),
-						dependency,
 						layer + 1,
 					)
 					.await?,

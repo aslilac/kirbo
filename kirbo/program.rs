@@ -7,6 +7,7 @@ mod npm;
 mod options;
 mod resolver;
 mod semver;
+mod workspace;
 use options::Command::*;
 use options::Options;
 

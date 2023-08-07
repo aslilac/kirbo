@@ -1,0 +1,5 @@
+# Usage
+
+## `greeting`
+
+Nya!

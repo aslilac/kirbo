@@ -36,11 +36,7 @@ pub async fn main(options: options::Options) -> anyhow::Result<()> {
 
 	let mut resolver = Resolver::default();
 	let installed_dependencies = resolver
-		.resolve_dependencies(
-			&joined_dependencies,
-			package.name.as_ref().map(String::as_ref).unwrap_or("."),
-			0,
-		)
+		.resolve_dependencies(&joined_dependencies, 0)
 		.await?;
 
 	println!("========================================");

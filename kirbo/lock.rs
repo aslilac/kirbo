@@ -39,8 +39,7 @@ mod tests {
 			packages: BTreeMap::from([(
 				"prettier@3.0.0".to_string(),
 				KirboLockPackage {
-					resolved: "https://registry.npmjs.org/prettier/-/prettier-3.0.0.tgz"
-						.to_string(),
+					resolved: "https://registry.npmjs.org/prettier/-/prettier-3.0.0.tgz".to_string(),
 					sha512: "abcdefghijklmnopqrstuvwxyz".to_string(),
 					..Default::default()
 				},
@@ -64,8 +63,7 @@ mod tests {
 			packages: BTreeMap::from([(
 				"succulent@^0.20.0".to_string(),
 				KirboLockPackage {
-					resolved: "https://registry.npmjs.org/succulent/-/succulent-0.20.0.tgz"
-						.to_string(),
+					resolved: "https://registry.npmjs.org/succulent/-/succulent-0.20.0.tgz".to_string(),
 					sha512: "abcdefghijklmnopqrstuvwxyz".to_string(),
 					..Default::default()
 				},

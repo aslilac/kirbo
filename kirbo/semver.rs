@@ -91,7 +91,10 @@ impl FromStr for Version {
 		});
 		let build_info = build_start.map(|start| s[start..s.len()].to_string());
 
-		// prerelease_info.map(str::is_empty).o
+		prerelease_info
+			.as_ref()
+			.map(|it| it.is_empty())
+			.unwrap_or(false);
 
 		let mut parts = version.split('.');
 		let major = parts
@@ -130,7 +133,8 @@ impl PartialOrd for Version {
 
 impl Ord for Version {
 	fn cmp(&self, other: &Self) -> Ordering {
-		self.major
+		self
+			.major
 			.cmp(&other.major)
 			.then(self.minor.cmp(&other.minor))
 			.then(self.patch.cmp(&other.patch))
@@ -215,9 +219,7 @@ impl SemverRange {
 			SemverRange::LessThan(range) => version < range,
 			SemverRange::Exact(range) => version == range,
 			SemverRange::Patched(range) => {
-				version.major == range.major
-					&& version.minor == range.minor
-					&& version.patch >= range.patch
+				version.major == range.major && version.minor == range.minor && version.patch >= range.patch
 			}
 			SemverRange::Compatible(range) => {
 				if range.major < 1 {
